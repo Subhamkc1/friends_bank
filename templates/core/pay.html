@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded-2xl shadow">
+  <h1 class="text-xl font-semibold mb-2">Pay or Request — {{ target.user.username }}</h1>
+  <form method="post" class="space-y-3">
+    {% csrf_token %}
+    <label class="block text-sm">Amount (Rs.)</label>
+    <input type="number" name="amount" min="1" step="0.01" required class="w-full border p-2 rounded-2xl">
+    <label class="block text-sm">Note (optional)</label>
+    <input type="text" name="note" class="w-full border p-2 rounded-2xl">
+    <div class="flex gap-2">
+      <button name="action" value="send" class="px-4 py-2 bg-black text-white rounded-2xl">Send</button>
+      <button name="action" value="request" class="px-4 py-2 bg-gray-800 text-white rounded-2xl">Request</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

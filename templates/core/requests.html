@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="grid md:grid-cols-2 gap-4">
+  <div class="bg-white p-4 rounded-2xl shadow">
+    <h2 class="font-semibold mb-2">Incoming Requests</h2>
+    <ul class="divide-y text-sm">
+      {% for r in incoming %}
+      <li class="py-2 flex justify-between items-center">
+        <div>
+          From: {{ r.requester.user.username }} — Rs. {{ r.amount }} <span class="text-gray-500">({{ r.status }})</span>
+        </div>
+        {% if r.status == 'pending' %}
+        <div class="space-x-2">
+          <a class="underline" href="{% url 'approve_request' r.id %}">Approve</a>
+          <a class="underline text-red-600" href="{% url 'reject_request' r.id %}">Reject</a>
+        </div>
+        {% endif %}
+      </li>
+      {% empty %}
+      <li class="py-2 text-gray-500">No incoming requests.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="bg-white p-4 rounded-2xl shadow">
+    <h2 class="font-semibold mb-2">Outgoing Requests</h2>
+    <ul class="divide-y text-sm">
+      {% for r in outgoing %}
+      <li class="py-2 flex justify-between">
+        <span>To: {{ r.target.user.username }} — Rs. {{ r.amount }} <span class="text-gray-500">({{ r.status }})</span></span>
+        <span class="text-gray-500">{{ r.created_at|date:"Y-m-d H:i" }}</span>
+      </li>
+      {% empty %}
+      <li class="py-2 text-gray-500">No outgoing requests.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

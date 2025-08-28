@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="grid md:grid-cols-2 gap-4">
+  <div class="bg-white p-4 rounded-2xl shadow">
+    <h2 class="font-semibold mb-2">Pending</h2>
+    <ul class="divide-y text-sm">
+      {% for w in pending %}
+        <li class="py-2 flex justify-between items-center">
+          <span>{{ w.user.username }} — Rs. {{ w.amount }} <span class="text-gray-500">({{ w.created_at|date:"Y-m-d H:i" }})</span></span>
+          <span class="space-x-2">
+            <a class="underline" href="{% url 'admin_withdraw_approve' w.id %}">Approve</a>
+            <a class="underline text-red-600" href="{% url 'admin_withdraw_reject' w.id %}">Reject</a>
+          </span>
+        </li>
+      {% empty %}
+        <li class="py-2 text-gray-500">No pending requests.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="bg-white p-4 rounded-2xl shadow">
+    <h2 class="font-semibold mb-2">Processed (recent)</h2>
+    <ul class="divide-y text-sm">
+      {% for w in processed %}
+        <li class="py-2 flex justify-between">
+          <span>{{ w.user.username }} — Rs. {{ w.amount }} <span class="text-gray-500">({{ w.status }})</span></span>
+          <span class="text-gray-500">{{ w.created_at|date:"Y-m-d H:i" }}</span>
+        </li>
+      {% empty %}
+        <li class="py-2 text-gray-500">Nothing processed yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

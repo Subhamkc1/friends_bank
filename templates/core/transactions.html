@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="bg-white p-4 rounded-2xl shadow">
+  <h1 class="font-semibold mb-2">Transactions</h1>
+  <div class="overflow-x-auto">
+    <table class="min-w-full text-sm">
+      <thead><tr class="text-left"><th class="p-2">ID</th><th class="p-2">Type</th><th class="p-2">Amount</th><th class="p-2">Fee</th><th class="p-2">From</th><th class="p-2">To</th><th class="p-2">Date</th></tr></thead>
+      <tbody class="divide-y">
+      {% for t in txs %}
+        <tr>
+          <td class="p-2">{{ t.id }}</td>
+          <td class="p-2">{{ t.type }}</td>
+          <td class="p-2">{{ t.amount }}</td>
+          <td class="p-2">{{ t.fee }}</td>
+          <td class="p-2">{{ t.from_account }}</td>
+          <td class="p-2">{{ t.to_account }}</td>
+          <td class="p-2">{{ t.created_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+      {% empty %}
+        <tr><td class="p-2" colspan="7">No transactions yet.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

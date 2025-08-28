@@ -1,0 +1,11 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded-2xl shadow">
+  <h1 class="text-xl font-semibold mb-2">Admin Deposit to User</h1>
+  <form method="post" class="space-y-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="px-4 py-2 bg-black text-white rounded-2xl">Deposit</button>
+  </form>
+</div>
+{% endblock %}
