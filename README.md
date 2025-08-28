@@ -33,5 +33,5 @@ Built with **Django + TailwindCSS + SQLite/Postgres**.
 Clone the repo:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/friendsbank.git
+git clone https://github.com/Subhamkc1/friends_bank.git
 cd friendsbank
